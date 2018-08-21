@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">PizzaSushi</string>
+    <string name="action_menu">Menu</string>
+    <string-array name="titles">
+        <item>Главная</item>
+        <item>Пица</item>
+        <item>Суши</item>
+        <item>Напитки</item>
+        <item>Корзина</item>
+    </string-array>
+
+    <string name="open_drawer">Open drawer</string>
+    <string name="close_drawer">Close drawer</string>
+</resources>
