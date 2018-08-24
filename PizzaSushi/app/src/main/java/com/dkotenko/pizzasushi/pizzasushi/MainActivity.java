@@ -1,5 +1,7 @@
 package com.dkotenko.pizzasushi.pizzasushi;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,43 +26,44 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
-    private String[] titles;
     private ListView drawerList;
+    private Presenter mPresenter;
 
     ActionBarDrawerToggle mBarDrawerToggle;
     DrawerLayout mDrawerLayout;
 
     private View listHeader;
 
+    private class DrawerItemClickListener implements ListView.OnItemClickListener{
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            mPresenter.selectItem(position, getFragmentManager().beginTransaction(),
+                    (DrawerLayout)findViewById(R.id.drawer_layout), drawerList);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        //******//
+        mPresenter = new Presenter(this);
         //******//
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         //*****//
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        titles = getResources().getStringArray(R.array.titles);
         drawerList = (ListView) findViewById(R.id.drawer);
+        drawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1, titles) {
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-                TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
-                tv.setGravity(Gravity.CENTER);
+        mPresenter.setAdapter(drawerList, getResources().getStringArray(R.array.titles), this);
 
-                return view;
-            }
-        });
-
-        listHeader = getLayoutInflater().inflate(R.layout.drawer_header, null);
-        drawerList.addHeaderView(listHeader);
+        mPresenter.setHeader(getLayoutInflater().inflate(R.layout.drawer_header, null), drawerList);
+        /*listHeader = getLayoutInflater().inflate(R.layout.drawer_header, null);
+        drawerList.addHeaderView(listHeader);*/
 
 
         mBarDrawerToggle = new ActionBarDrawerToggle(this,
