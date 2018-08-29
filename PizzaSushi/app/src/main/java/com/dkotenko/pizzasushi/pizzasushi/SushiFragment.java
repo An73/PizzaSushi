@@ -11,39 +11,39 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public    class SushiFragment extends ListFragment {
 
     private SQLiteDatabase db;
     private Cursor mCursor;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        SQLiteOpenHelper sqLiteOpenHelper = new BDHelper(getActivity());
+        db = sqLiteOpenHelper.getWritableDatabase();
+    }
 
-        SQLiteOpenHelper sqLiteOpenHelper = new BDHelper(inflater.getContext());
-        db = sqLiteOpenHelper.getReadableDatabase();
-        mCursor = db.query("PIZZA", new String[]{"NAME"},
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getActivity().setTitle("Суши");
+
+        mCursor = db.query("SUSHI", new String[]{"_id", "NAME", "DESCRIPTION", "IMAGE_RESOURCE_ID", "COST", "TO_BASKET"},
                 null, null, null, null, null);
+        MyCursorAdapter myCursorAdapter = new MyCursorAdapter(getActivity(), mCursor, db, "SUSHI");
+        setListAdapter(myCursorAdapter);
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        db.close();
+    }
 
-        String[] array = new String[1];
-        array[0] = "0";
-        if (mCursor.moveToFirst()) {
-           // String uname = mCursor.getString(0);
-            array[0] = "21321";
-        }
-        //String uname = "231213";
-        /*for(int i = 0; mCursor.moveToNext(); i++) {
-            String uname = mCursor.getString(mCursor.getColumnIndex("NAME"));
-            array[i] = uname;
-        }*/
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                inflater.getContext(),
-                android.R.layout.simple_list_item_1,
-                /*getResources().getStringArray(R.array.dp_pizza_cost)*/array);
-        setListAdapter(adapter);
-        return super.onCreateView(inflater, container, savedInstanceState);
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
     }
 }

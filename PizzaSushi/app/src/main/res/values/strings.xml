@@ -2,7 +2,6 @@
     <string name="app_name">PizzaSushi</string>
     <string name="action_menu">Menu</string>
     <string-array name="titles">
-        <item>Главная</item>
         <item>Пицца</item>
         <item>Суши</item>
         <item>Напитки</item>

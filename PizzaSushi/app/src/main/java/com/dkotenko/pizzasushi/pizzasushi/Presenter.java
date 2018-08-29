@@ -34,23 +34,34 @@ public    class Presenter   {
         Fragment listFragment;
         switch (position) {
             case 1:
-                listFragment = new TopFragment();
+                listFragment = new PizzaFragment();
                 break;
             case 2:
-                listFragment = new PizzaFragment();
+                listFragment = new SushiFragment();
                 break;
             case 3:
                 listFragment = new SushiFragment();
                 break;
+            case 4:
+                listFragment = new BasketFragment();
+                break;
             default:
                 listFragment = new PizzaFragment();
-                //fragment= new TopFragment();
         }
         ft.replace(R.id.content_frame, listFragment);
         ft.addToBackStack(null);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
         drawerLayout.closeDrawer(drawerList);
+    }
+
+    public void startMain(FragmentTransaction ft) {
+        Fragment listFragment = new PizzaFragment();
+
+        ft.replace(R.id.content_frame, listFragment);
+        ft.addToBackStack(null);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
     }
 
 

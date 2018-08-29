@@ -17,10 +17,10 @@
     </string-array>
 
     <string-array name="dp_pizza_cost">
-        <item>15$</item>
-        <item>20$</item>
-        <item>24$</item>
-        <item>35$</item>
-        <item>18$</item>
+        <item>15</item>
+        <item>20</item>
+        <item>24</item>
+        <item>35</item>
+        <item>18</item>
     </string-array>
 </resources>

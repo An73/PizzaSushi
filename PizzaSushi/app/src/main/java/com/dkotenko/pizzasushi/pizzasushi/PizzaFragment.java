@@ -50,14 +50,21 @@ public    class PizzaFragment extends ListFragment {
     }*/
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        SQLiteOpenHelper sqLiteOpenHelper = new BDHelper(getActivity());
+        db = sqLiteOpenHelper.getWritableDatabase();
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getActivity().setTitle("Пицца");
 
-        SQLiteOpenHelper sqLiteOpenHelper = new BDHelper(getActivity());
-        db = sqLiteOpenHelper.getReadableDatabase();
+        //SQLiteOpenHelper sqLiteOpenHelper = new BDHelper(getActivity());
+        //db = sqLiteOpenHelper.getWritableDatabase();
 
-        mCursor = db.query("PIZZA", new String[]{"_id", "NAME", "DESCRIPTION", "IMAGE_RESOURCE_ID", "COST"},
+        mCursor = db.query("PIZZA", new String[]{"_id", "NAME", "DESCRIPTION", "IMAGE_RESOURCE_ID", "COST", "TO_BASKET"},
                 null, null, null, null, null);
         /*CursorAdapter listAdapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_1, mCursor,
                 new String[]{"NAME"},
@@ -65,7 +72,7 @@ public    class PizzaFragment extends ListFragment {
                 0);
         setListAdapter(listAdapter);*/
 
-        MyCursorAdapter myCursorAdapter = new MyCursorAdapter(getActivity(), mCursor);
+        MyCursorAdapter myCursorAdapter = new MyCursorAdapter(getActivity(), mCursor, db, "PIZZA");
         setListAdapter(myCursorAdapter);
     }
 

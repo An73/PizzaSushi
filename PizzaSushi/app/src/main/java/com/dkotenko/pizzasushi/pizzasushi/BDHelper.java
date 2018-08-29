@@ -31,6 +31,7 @@ public    class BDHelper extends SQLiteOpenHelper {
         + "NAME TEXT, "
         + "COST TEXT, "
         + "DESCRIPTION TEXT, "
+        + "TO_BASKET INTEGER, "
         + "IMAGE_RESOURCE_ID INTEGER);");
 
 
@@ -42,6 +43,7 @@ public    class BDHelper extends SQLiteOpenHelper {
             values.put("NAME", name_strings[i]);
             values.put("COST", cost_strings[i]);
             values.put("DESCRIPTION", descrption_strings[i]);
+            values.put("TO_BASKET", 0);
             db.insert("PIZZA", null, values);
         }
         values.clear();
@@ -56,6 +58,12 @@ public    class BDHelper extends SQLiteOpenHelper {
         db.update("PIZZA", values, "_id = ?",  new String[] {Integer.toString(4)});
         values.put("IMAGE_RESOURCE_ID", R.drawable.margarita_p);
         db.update("PIZZA", values, "_id = ?",  new String[] {Integer.toString(5)});
+        values.clear();
+
+        db.execSQL("CREATE TABLE BASKET ("
+                + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "NAME TEXT, "
+                + "COST TEXT);");
 
        /* pizza_strings = res.getStringArray(R.array.dp_pizza_cost);
         for (int i = 0; i < pizza_strings.length; i++) {
@@ -78,16 +86,43 @@ public    class BDHelper extends SQLiteOpenHelper {
         values.put("IMAGE_RESOURCE_ID", R.drawable.margarita_p);
         db.insert("PIZZA", null, values);*/
 
+        name_strings = res.getStringArray(R.array.db_sushi_name);
+        cost_strings = res.getStringArray(R.array.dp_sushi_cost);
+        descrption_strings = res.getStringArray(R.array.db_sushi_description);
 
-
-        /*db.execSQL("CREATE TABLE SUSHI ("
+        db.execSQL("CREATE TABLE SUSHI ("
                 + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "NAME TEXT, "
-                + "COST"
+                + "COST TEXT, "
                 + "DESCRIPTION TEXT, "
+                + "TO_BASKET INTEGER, "
                 + "IMAGE_RESOURCE_ID INTEGER);");
 
-        db.execSQL("CREATE TABLE DRINK ("
+        for (int i = 0; i < name_strings.length; i++) {
+            values.put("NAME", name_strings[i]);
+            values.put("COST", cost_strings[i]);
+            values.put("DESCRIPTION", descrption_strings[i]);
+            values.put("TO_BASKET", 0);
+            db.insert("SUSHI", null, values);
+        }
+        values.clear();
+
+        values.put("IMAGE_RESOURCE_ID", R.drawable.philadelphia_s);
+        db.update("SUSHI", values, "_id = ?", new String[] {Integer.toString(1)});
+        values.put("IMAGE_RESOURCE_ID", R.drawable.unagi);
+        db.update("SUSHI", values, "_id = ?",  new String[] {Integer.toString(2)});
+        values.put("IMAGE_RESOURCE_ID", R.drawable.unagi_s);
+        db.update("SUSHI", values, "_id = ?",  new String[] {Integer.toString(3)});
+        values.put("IMAGE_RESOURCE_ID", R.drawable.gunkantobi_s);
+        db.update("SUSHI", values, "_id = ?",  new String[] {Integer.toString(4)});
+        values.put("IMAGE_RESOURCE_ID", R.drawable.phelicks_s);
+        db.update("SUSHI", values, "_id = ?",  new String[] {Integer.toString(5)});
+        values.clear();
+
+
+
+
+        /*db.execSQL("CREATE TABLE DRINK ("
                 + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "NAME TEXT, "
                 + "COST"
@@ -102,5 +137,12 @@ public    class BDHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    }
+
+    public void clearBasket() {
+        SQLiteDatabase db;
+        db = getWritableDatabase();
+
+        db.delete("BASKET", null, null);
     }
 }

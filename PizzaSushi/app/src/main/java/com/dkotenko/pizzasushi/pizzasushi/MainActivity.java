@@ -29,10 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private ListView drawerList;
     private Presenter mPresenter;
 
-    ActionBarDrawerToggle mBarDrawerToggle;
-    DrawerLayout mDrawerLayout;
-
-    private View listHeader;
+    private ActionBarDrawerToggle mBarDrawerToggle;
+    private DrawerLayout mDrawerLayout;
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener{
         @Override
@@ -48,11 +46,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        //******//
         mPresenter = new Presenter(this);
-        //******//
+        mPresenter.startMain(getFragmentManager().beginTransaction());
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //*****//
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -62,8 +58,6 @@ public class MainActivity extends AppCompatActivity {
         mPresenter.setAdapter(drawerList, getResources().getStringArray(R.array.titles), this);
 
         mPresenter.setHeader(getLayoutInflater().inflate(R.layout.drawer_header, null), drawerList);
-        /*listHeader = getLayoutInflater().inflate(R.layout.drawer_header, null);
-        drawerList.addHeaderView(listHeader);*/
 
 
         mBarDrawerToggle = new ActionBarDrawerToggle(this,
@@ -83,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         mDrawerLayout.setDrawerListener(mBarDrawerToggle);
-        //mBarDrawerToggle.syncState();
     }
 
 
@@ -106,4 +99,8 @@ public class MainActivity extends AppCompatActivity {
         mBarDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }
