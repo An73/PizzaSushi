@@ -102,17 +102,8 @@ public    class MyCursorAdapter extends CursorAdapter {
                     db.insert("BASKET", null, basketVal);
                 }
                 basketVal.clear();
-                /*int add;
-                if (curs.moveToPosition(position)) {
-                    add = curs.getInt(curs.getColumnIndexOrThrow("TO_BASKET")) + 1;
-                    basketVal.put("TO_BASKET", add);
-                    db.update("PIZZA", basketVal, "_id = ?", new String[] {Integer.toString(position + 1)});
-                }
-                basketVal.clear();*/
             }
         });
-        //values.put("TO_BASKET", 0);
-        //db.insert("PIZZA", null, values);
 
         return super.getView(position, convertView, parent);
     }

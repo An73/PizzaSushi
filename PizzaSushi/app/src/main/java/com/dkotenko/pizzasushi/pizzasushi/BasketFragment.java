@@ -50,10 +50,6 @@ public class BasketFragment extends Fragment {
 
         mCursor = db.query("BASKET", new String[]{"_id", "NAME", "COST"},
                 null, null, null, null, null);
-        /*CursorAdapter listAdapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_1, mCursor,
-                new String[]{"NAME"},
-                new int[]{android.R.id.text1},
-                0);*/
         setSum(mCursor, sumView);
         CursorBasket cursorBasket = new CursorBasket(getActivity(), mCursor, db, sumView);
         ListView listView = (ListView) view.findViewById(R.id.list_order);
@@ -91,29 +87,6 @@ public class BasketFragment extends Fragment {
 
         sumView.setText("Сумма: " + Integer.toString(sum) + "$");
     }
-
-    /*@Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getActivity().setTitle("Корзина");
-
-        SQLiteOpenHelper sqLiteOpenHelper = new BDHelper(getActivity());
-        db = sqLiteOpenHelper.getReadableDatabase();
-
-        mCursor = db.query("PIZZA", new String[]{"_id", "NAME", "DESCRIPTION", "IMAGE_RESOURCE_ID", "COST", "TO_BASKET"},
-                null, null, null, null, null);
-        CursorAdapter listAdapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_1, mCursor,
-                new String[]{"TO_BASKET"},
-                new int[]{android.R.id.text1},
-                0);
-        ListView listView = (ListView) getActivity().findViewById(R.id.listlist);
-
-        listView.setAdapter(listAdapter);
-        //setListAdapter(listAdapter);
-
-        //MyCursorAdapter myCursorAdapter = new MyCursorAdapter(getActivity(), mCursor, db);
-        //setListAdapter(myCursorAdapter);
-    }*/
 
     @Override
     public void onDestroy() {

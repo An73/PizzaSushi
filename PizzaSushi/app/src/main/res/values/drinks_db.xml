@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="db_drink_name">
+        <item>Coca-Cola</item>
+        <item>Pepsi</item>
+        <item>Sprite</item>
+        <item>Dr.Pepper</item>
+        <item>Fanta</item>
+    </string-array>
+
+    <string-array name="db_drink_description">
+        <item>Жестяная банка 0,5 л.</item>
+        <item>Жестяная банка 0,5 л.</item>
+        <item>Пластиковая бутылка 1 л.</item>
+        <item>Сет из шести банок по 0,5 л.</item>
+        <item>Жестяная банка 0,5 л.</item>
+    </string-array>
+
+    <string-array name="dp_drink_cost">
+        <item>3</item>
+        <item>2</item>
+        <item>5</item>
+        <item>21</item>
+        <item>3</item>
+    </string-array>
+</resources>

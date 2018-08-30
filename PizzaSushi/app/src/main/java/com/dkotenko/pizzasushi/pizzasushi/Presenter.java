@@ -40,7 +40,7 @@ public    class Presenter   {
                 listFragment = new SushiFragment();
                 break;
             case 3:
-                listFragment = new SushiFragment();
+                listFragment = new DrinkFragment();
                 break;
             case 4:
                 listFragment = new BasketFragment();
