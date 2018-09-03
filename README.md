@@ -1,5 +1,5 @@
 # PizzaSushi
-This project for pseudo-restaurant (order food). In this project i'm used SQLite (puzzle out).
+This project for pseudo-restaurant (order food). In this project I have used SQLite.
 
 ![screenshot_2018-08-30-16-40-39-229_com miui home](https://user-images.githubusercontent.com/33597605/44856219-9114a300-ac75-11e8-932e-a0bee2720f6d.png) ![screenshot_2018-08-30-16-41-03-529_com dkotenko pizzasushi pizzasushi](https://user-images.githubusercontent.com/33597605/44856309-c15c4180-ac75-11e8-8d1c-dc39660a6846.png)
 
